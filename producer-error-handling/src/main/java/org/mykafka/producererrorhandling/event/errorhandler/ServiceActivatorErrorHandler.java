@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ServiceActivatorErrorHandler {
 
-//    @Bean
-//    MessageChannel errorChannel() {
-//        return new DirectChannel();
-//    }
-//
-//    @ServiceActivator(inputChannel = "errorChannel")
-//    public void orderUpdateEventErrorHandle(GenericMessage<KafkaSendFailureException> msg) {
-//        log.error("ServiceActivator error: {}", msg.getPayload().getRecord());
-//    }
+    @Bean
+    MessageChannel errorChannel() {
+        return new DirectChannel();
+    }
+
+    @ServiceActivator(inputChannel = "errorChannel")
+    public void orderUpdateEventErrorHandle(GenericMessage<KafkaSendFailureException> msg) {
+        log.error("ServiceActivator error: {}", msg.getPayload().getRecord());
+    }
 }
