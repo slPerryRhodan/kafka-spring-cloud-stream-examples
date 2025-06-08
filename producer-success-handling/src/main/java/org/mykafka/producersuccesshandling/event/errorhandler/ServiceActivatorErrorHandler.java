@@ -21,6 +21,5 @@ public class ServiceActivatorErrorHandler {
     @ServiceActivator(inputChannel = "errorChannel")
     public void orderUpdateEventErrorHandle(GenericMessage<KafkaSendFailureException> message) {
             log.error("Error channel: failedKafkaMsg=[{}]", message.getPayload().getFailedMessage());
-
     }
 }

@@ -54,8 +54,8 @@ public class LoggingChannelInterceptor implements ChannelInterceptor {
     }
 
     private <T> Message<T> addRequestIdHeader(Message<T> msg) {
-        Map<String, Object> rawHeaderMap = new HashMap(msg.getHeaders());
+        Map<String, Object> rawHeaderMap = new HashMap<>(msg.getHeaders());
         rawHeaderMap.put(REQUEST_ID, this.getRequestIdFromMdc());
-        return new GenericMessage(msg.getPayload(), rawHeaderMap);
+        return new GenericMessage<>(msg.getPayload(), rawHeaderMap);
     }
 }

@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: producer-error-handling
+    name: producer-success-handling
   lifecycle:
     timeout-per-shutdown-phase: 30s
   cloud:
