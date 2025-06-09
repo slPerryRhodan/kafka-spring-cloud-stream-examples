@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    stream:
+      output-bindings: updateOrder
+      bindings:
+        updateOrder:
+          producer:
+            error-channel-enabled: false
+      kafka:
+        binder:
+          producer-properties:
+            delivery:
+              timeout:
+                ms: 500                # The value of this config should be greater than or equal to the sum of request.timeout.ms and linger.ms. https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html
+            request:
+              timeout:
+                ms: 500
+        bindings:
+          updateOrder:
+            producer:
+              sync: true
+
+#logging:
+#  level:
+#    org:
+#      springframework.integration: TRACE
+#      springframework.boot: TRACE

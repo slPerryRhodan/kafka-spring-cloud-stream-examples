@@ -7,7 +7,6 @@ import org.mykafka.producersuccesshandling.event.errorhandler.ServiceActivatorEr
 import org.mykafka.producersuccesshandling.event.successhandler.ServiceActivatorSuccessHandler;
 import org.mykafka.producersuccesshandling.model.OrderEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
@@ -43,12 +42,17 @@ class OrderEventSupplierEmbeddedKafkaTest {
 
     @Test
     void sendOrderUpdateEvent_kafkaIsRunning_successHandlerCalled() {
-        orderEventSupplier.sendOrderUpdateEvent(OrderEvent.builder()
+        // given
+        var orderEvent = OrderEvent.builder()
                 .orderEventId(1)
                 .orderNumber("orderNumber")
                 .customerNumber("customerNumber")
-                .build());
+                .build();
 
+        // when
+        orderEventSupplier.sendOrderUpdateEvent(orderEvent);
+
+        // then
         verify(streamBridge).send(any(), any());
         await()
                 .pollInterval(Duration.ofSeconds(1))
@@ -58,12 +62,17 @@ class OrderEventSupplierEmbeddedKafkaTest {
 
     @Test
     void sendOrderUpdateEvent_kafkaIsNotRunning_errorHandlerCalled() {
-        orderEventSupplier.sendOrderUpdateEvent(OrderEvent.builder()
-                .orderEventId(1)
-                .orderNumber("orderNumber")
-                .customerNumber("customerNumber")
-                .build());
+        // given
+        var orderEvent = OrderEvent.builder()
+                .orderEventId(2)
+                .orderNumber("orderNumber2")
+                .customerNumber("customerNumber2")
+                .build();
 
+        // when
+        orderEventSupplier.sendOrderUpdateEvent(orderEvent);
+
+        // then
         await()
                 .pollInterval(Duration.ofSeconds(1))
                 .atMost(3, SECONDS)

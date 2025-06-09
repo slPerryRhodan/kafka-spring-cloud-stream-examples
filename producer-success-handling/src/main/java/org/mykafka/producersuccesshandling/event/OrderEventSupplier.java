@@ -36,6 +36,7 @@ public class OrderEventSupplier {
             }
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
+            throw ex;
         }
     }
 
