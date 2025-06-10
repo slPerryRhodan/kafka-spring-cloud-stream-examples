@@ -1,4 +1,4 @@
-name: Test Gradle Build
+name: Build & Test
 on:
   push:
   workflow_dispatch:
