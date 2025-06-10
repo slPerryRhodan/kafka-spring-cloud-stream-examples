@@ -14,14 +14,14 @@ spring:
         updateOrder:
           destination: UPDATE_ORDER
           contentType: application/json
-          group: producerGroup
+          group: PRODUCER_HANDLING_UPDATE_ORDER
           producer:
             error-channel-enabled: true
             partitionCount: 1
         updateSecondOrder:
           destination: UPDATE_SECOND_ORDER
           contentType: application/json
-          group: producerGroup
+          group: PRODUCER_HANDLING_UPDATE_SECOND_ORDER
           producer:
             partitionCount: 1
       kafka:
@@ -31,7 +31,7 @@ spring:
           replicationFactor: 1
           requiredAcks: all
           headerMapperBeanName: headerMapper
-          producer-properties:
+          producerProperties:
             delivery:
               timeout:
                 ms: 5000                # The value of this config should be greater than or equal to the sum of request.timeout.ms and linger.ms. https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html
