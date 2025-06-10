@@ -1,0 +1,16 @@
+### Send request with dynamic variables in request's body
+POST http://localhost:8080/v1/orderevent
+Content-Type: application/json
+
+{
+  "orderEventId": 123,
+  "orderNumber": "order-1234",
+  "customerNumber": "customer-1"
+}
+
+<> 2025-06-08T185504.201.json
+<> 2025-06-08T185420.201.json
+<> 2025-06-08T185402.201.json
+<> 2025-06-08T185244.201.json
+<> 2025-06-08T173150.201.json
+<> 2025-06-08T003351.201.json
