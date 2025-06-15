@@ -21,5 +21,8 @@ jobs:
       id: setup-gradle
       with:
         gradle-version: 8.14.2
-    - run: gradle clean bootJar check
+    - name: Build Gradle Project
+      run: gradle bootJar
+    - name: Run Tests
+      run: gradle check
     - run: echo "The release-candidate version was ${{ steps.setup-gradle.outputs.gradle-version }}"
